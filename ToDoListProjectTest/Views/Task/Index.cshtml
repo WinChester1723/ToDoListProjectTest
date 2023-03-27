@@ -1,0 +1,17 @@
+﻿@using ToDoListProjectTest.Domain.Enum;
+@{
+    ViewData["Title"] = "Create Task";
+}
+
+<form id="createTaskForm">
+    <div class="mb-3">
+        <label class="form-label">Task Name</label>
+        <input name="name" type="text" class="form-control"/>
+    </div>
+    <select name="priority" class="form-select mb-3" asp-items="Html.GetEnumSelectList<Priority>()"></select>
+    <div class="mb-3">
+        <label class="form-label">Task Description</label>
+        <textarea name="description" type="text" class="form-control" rows="3"></textarea>
+    </div>
+    <button id="createTask" class="btn btn-primary">Create</button>
+</form>
