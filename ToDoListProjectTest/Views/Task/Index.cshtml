@@ -15,3 +15,32 @@
     </div>
     <button id="createTask" class="btn btn-primary">Create</button>
 </form>
+
+@section Scripts
+{
+    <script>
+        $('#createTask').on('click',function(){
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create")',
+                data: $('#createTaskForm').serialize(),
+                success: function (response){
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                },
+                error: function (response){
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.responseJSON.description,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            })
+        })
+    </script>
+}
