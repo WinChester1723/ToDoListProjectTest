@@ -30,13 +30,16 @@ namespace ToDoListProjectTest.Service.Implementations
         {
             try
             {
+
+                model.Validate();
+
                 _logger.LogInformation($"Request for a create Task - {model.Name}");
 
                 //get task name
                 //if we have this task, dont added, message - we have this task
                 //
                 var task = await _taskRepository.GetAll()
-                    .Where(x => x.Created == DateTime.Today)
+                    .Where(x => x.Created.Date == DateTime.Today)
                     .FirstOrDefaultAsync(x => x.Name == model.Name);
 
                 if (task != null)
@@ -71,7 +74,7 @@ namespace ToDoListProjectTest.Service.Implementations
                 _logger.LogError(ex, $"[TaskService.Created]: {ex.Message}");
                 return new BaseResponse<TaskEntity>()
                 {
-                    Description = "Internal Error",
+                    Description = $"{ex.Message}",
                     StatusCode = StatusCode.InternalServerError
                 };
             }

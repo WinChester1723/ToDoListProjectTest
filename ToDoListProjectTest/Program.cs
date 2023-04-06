@@ -2,11 +2,17 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using ToDoListProjectTest;
 using ToDoListProjectTest.Dal;
+using ToDoListProjectTest.Dal.Interfaces;
+using ToDoListProjectTest.Dal.Repository;
+using ToDoListProjectTest.Domain.Entity;
+using ToDoListProjectTest.Service.Implementations;
+using ToDoListProjectTest.Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 //Repo Register
 //but we can create Init class and use in here
@@ -18,6 +24,12 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+//builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();// this form use are equal
+
+//nado obezatelno eti punkti tut zareqat v class Programm shtobi vse rabotalo!!!
+builder.Services.AddScoped<IBaseRepository<TaskEntity>, TaskRepository>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 var app = builder.Build();
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ToDoList.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="bg-light">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -26,10 +26,18 @@
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Task Execution</span>
+                    <span class="badge badge-secondary badge-pill text-muted" id="countOfCompletedTask"></span>
                 </h4>
                 <ul class="list-group mb-3" id="completedListTask"></ul>
-                <div class="card col-md-12">
-                    <button type="submit" class="btn btn-secondary" id="calculateTask">End The Day</button>
+                <form>
+                    <div class="card col-md-12">
+                        <button type="submit" class="btn btn-secondary" id="calculateTask">End The Day</button>
+                    </div>
+                </form>
+                <br />
+                <div class="form-group">
+                    <label>Notes For Me</label>
+                    <textarea class="form-control" rows="3"></textarea>
                 </div>
             </div>
             <div class="col-md-8 oreder-md-1">
